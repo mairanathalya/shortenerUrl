@@ -40,7 +40,7 @@ public class Main implements RequestHandler<Map<String,Object>, Map<String, Stri
         //identificar cada url encurtada e nomear cada arquivo json no s3
         String shortUrlCode = UUID.randomUUID().toString().substring(0,8);
 
-        long expirationTimeInSeconds = Long.parseLong(expirationTime);
+        Long expirationTimeInSeconds = Long.parseLong(expirationTime);
         //empacotar as informações da originalUrl e expirationTime para um objeto json, que vai salvar no s3
         UrlData urlData = new UrlData(originalUrl, expirationTimeInSeconds);
 
