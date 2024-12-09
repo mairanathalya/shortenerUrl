@@ -11,8 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class Main implements RequestHandler<Map<String,Object>, Map<String, String>> {
-    //implementação de uma interface na classe para o metedo handlerequest para ajudar o metodo saber os parametros que vai receber, com isso identificiar e extrair as informações
+public class ShortenerUrl implements RequestHandler<Map<String,Object>, Map<String, String>> {
+    //implementação de uma interface na classe para o metedo handlerequest para ajudar o metodo saber os parametros que vai receber, com isso identificar e extrair as informações
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     private final S3Client s3Client = S3Client.builder().build();
@@ -21,8 +21,8 @@ public class Main implements RequestHandler<Map<String,Object>, Map<String, Stri
         //toda informação que foi passado na lambda vai ser repassado no objeto input, então consegue pegar o body da requisição
         String body = (String) input.get("body");
 
-        //desteralizar para obter os dados do body
-        //fazendo um try catch pq pode ser que os campos venha ou não, ou dados errados
+        //partindo para obter os dados do body
+        //fazendo um try catch pq pode ser que os campos venha ou não, ou um possivel dados errados
 
         Map<String, String> bodyMap;
 
@@ -34,7 +34,6 @@ public class Main implements RequestHandler<Map<String,Object>, Map<String, Stri
 
         //extrair os campos do body
         String originalUrl = bodyMap.get("originalUrl");
-        //extrair o tempo de expiração
         String expirationTime = bodyMap.get("expirationTime");
 
         //identificar cada url encurtada e nomear cada arquivo json no s3
